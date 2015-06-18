@@ -270,6 +270,7 @@ class ShippingBackendRedirectView(LoginMixin, ShopView):
         try:
             backend_namespace = self.request.session.pop('shipping_backend')
             return HttpResponseRedirect(reverse(backend_namespace))
+        # FIXME: This should catch NoReverseMatch instead
         except KeyError:
             return HttpResponseRedirect(reverse('cart'))
 
@@ -279,5 +280,6 @@ class PaymentBackendRedirectView(LoginMixin, ShopView):
         try:
             backend_namespace = self.request.session.pop('payment_backend')
             return HttpResponseRedirect(reverse(backend_namespace))
+        # FIXME: This should catch NoReverseMatch instead
         except KeyError:
             return HttpResponseRedirect(reverse('cart'))
